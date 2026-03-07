@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fire120 Members Dashboard — Julia Kai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fire: #E8541A;
+    --amber: #F4A229;
+    --gold: #F0C060;
+    --coral: #F07050;
+    --cream: #FDF8F2;
+    --warm-white: #FFFBF5;
+    --charcoal: #2A2118;
+    --brown: #6B4C35;
+    --light-brown: #C4956A;
+    --ocean: #2B7A8C;
+    --ocean-light: #4AA8B8;
+    --mist: #F5EDE3;
+    --green: #3A9E6F;
+    --green-light: #52C48A;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--charcoal);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(253,248,242,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(232,84,26,0.12);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600; color: var(--charcoal);
+  }
+  .nav-logo span { color: var(--fire); }
+  .nav-badge {
+    background: var(--fire); color: white;
+    padding: 0.4rem 1rem; border-radius: 2px;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--brown);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--fire); }
+
+  /* HERO BANNER */
+  .dashboard-hero {
+    padding: 6rem 3rem 3rem;
+    background: linear-gradient(135deg, var(--charcoal) 0%, #3D2A1A 100%);
+    position: relative; overflow: hidden;
+  }
+  .dashboard-hero::before {
+    content: ''; position: absolute; top: -30%; right: -10%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,162,41,0.15) 0%, transparent 70%);
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+  .welcome-tag {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.8rem; opacity: 0.8;
+  }
+  .dashboard-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300;
+    color: var(--warm-white); line-height: 1.2; margin-bottom: 0.8rem;
+  }
+  .dashboard-hero h1 em { font-style: italic; color: var(--amber); }
+  .dashboard-hero p {
+    font-size: 0.95rem; color: rgba(255,255,255,0.5);
+    font-weight: 300; max-width: 580px; line-height: 1.7;
+  }
+
+  /* PORTFOLIO SUMMARY STRIP */
+  .summary-strip {
+    background: var(--fire);
+    padding: 1.8rem 3rem;
+  }
+  .summary-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; gap: 4rem; flex-wrap: wrap; align-items: center;
+  }
+  .summary-item { }
+  .summary-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 600; color: white; display: block;
+  }
+  .summary-label {
+    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.65); margin-top: 0.1rem; display: block;
+  }
+  .updated {
+    margin-left: auto; font-size: 0.75rem; color: rgba(255,255,255,0.5);
+    font-style: italic;
+  }
+
+  /* MAIN CONTENT */
+  .dashboard-body { max-width: 1100px; margin: 0 auto; padding: 3rem; }
+
+  /* SECTION HEADERS */
+  .dash-section { margin-bottom: 4rem; }
+  .dash-section-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1.5rem; padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(232,84,26,0.15);
+  }
+  .bucket-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 600; color: var(--fire);
+    line-height: 1; opacity: 0.4;
+  }
+  .bucket-info { }
+  .bucket-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400; color: var(--charcoal);
+  }
+  .bucket-desc { font-size: 0.8rem; color: var(--light-brown); font-weight: 300; margin-top: 0.1rem; }
+
+  /* STOCK CARDS GRID */
+  .stocks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+  .stock-card {
+    background: var(--warm-white);
+    border: 1px solid rgba(42,33,24,0.1);
+    border-radius: 4px; padding: 1.2rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stock-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(42,33,24,0.08); }
+  .stock-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .stock-card.core::before { background: linear-gradient(90deg, var(--charcoal), var(--brown)); }
+  .stock-card.hyper::before { background: linear-gradient(90deg, var(--fire), var(--amber)); }
+  .stock-card.dividend::before { background: linear-gradient(90deg, var(--ocean), var(--ocean-light)); }
+  .stock-card.engine::before { background: linear-gradient(90deg, var(--green), var(--green-light)); }
+
+  .stock-ticker {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 600; color: var(--charcoal);
+    margin-bottom: 0.2rem;
+  }
+  .stock-shares { font-size: 0.72rem; color: var(--light-brown); margin-bottom: 0.6rem; }
+  .stock-signal {
+    display: inline-block; font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.2rem 0.5rem; border-radius: 2px; margin-bottom: 0.6rem;
+  }
+  .signal-hold { background: rgba(244,162,41,0.15); color: #B87800; }
+  .signal-buy { background: rgba(58,158,111,0.15); color: var(--green); }
+  .signal-watch { background: rgba(43,122,140,0.15); color: var(--ocean); }
+  .signal-core { background: rgba(42,33,24,0.08); color: var(--brown); }
+  .signal-wait { background: rgba(232,84,26,0.1); color: var(--fire); }
+  .stock-note { font-size: 0.78rem; color: var(--brown); font-weight: 300; line-height: 1.5; }
+
+  /* PERPETUAL MACHINE */
+  .machine-section {
+    background: linear-gradient(135deg, var(--charcoal) 0%, #3D2A1A 100%);
+    border-radius: 8px; padding: 2.5rem; margin-bottom: 4rem;
+    position: relative; overflow: hidden;
+  }
+  .machine-section::before {
+    content: ''; position: absolute; top: -40%; right: -10%;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(58,158,111,0.12) 0%, transparent 70%);
+  }
+  .machine-inner { position: relative; z-index: 2; }
+  .machine-header {
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+  }
+  .machine-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; color: var(--warm-white);
+  }
+  .machine-title em { color: var(--green-light); font-style: italic; }
+  .machine-sub { font-size: 0.82rem; color: rgba(255,255,255,0.4); font-weight: 300; }
+  .machine-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .engine-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px; padding: 1.8rem;
+  }
+  .engine-ticker {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 600; color: var(--green-light);
+    margin-bottom: 0.2rem;
+  }
+  .engine-shares { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+  .engine-yield {
+    font-size: 1.4rem; font-weight: 500; color: var(--gold);
+    margin-bottom: 0.3rem;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .engine-yield-label { font-size: 0.7rem; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.2rem; }
+  .engine-progress-wrap {
+    background: rgba(255,255,255,0.06); border-radius: 2px; height: 8px; margin-bottom: 0.5rem;
+  }
+  .engine-progress {
+    height: 100%; border-radius: 2px;
+    background: linear-gradient(90deg, var(--green), var(--green-light));
+  }
+  .engine-progress-label {
+    font-size: 0.72rem; color: rgba(255,255,255,0.35);
+    display: flex; justify-content: space-between;
+  }
+
+  /* DIVIDEND TRACKER */
+  .dividend-section {
+    background: var(--mist); border-radius: 8px; padding: 2.5rem; margin-bottom: 4rem;
+  }
+  .div-header { margin-bottom: 2rem; }
+  .div-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; color: var(--charcoal); margin-bottom: 0.3rem;
+  }
+  .div-title em { color: var(--fire); font-style: italic; }
+  .div-sub { font-size: 0.82rem; color: var(--light-brown); font-weight: 300; }
+  .div-bars { display: flex; flex-direction: column; gap: 1rem; }
+  .div-row { display: flex; align-items: center; gap: 1rem; }
+  .div-month {
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--light-brown); width: 75px; flex-shrink: 0;
+  }
+  .div-bar-wrap {
+    flex: 1; background: rgba(42,33,24,0.06); border-radius: 2px; height: 36px;
+    position: relative;
+  }
+  .div-bar {
+    height: 100%; border-radius: 2px;
+    display: flex; align-items: center; padding-right: 1rem;
+    justify-content: flex-end; min-width: 80px;
+  }
+  .div-bar.dec { background: linear-gradient(90deg, var(--fire), var(--amber)); }
+  .div-bar.jan { background: linear-gradient(90deg, var(--ocean), var(--ocean-light)); }
+  .div-bar.feb { background: linear-gradient(90deg, var(--fire), var(--coral)); }
+  .div-bar.goal {
+    background: transparent;
+    border: 1.5px dashed rgba(232,84,26,0.3);
+    justify-content: flex-start; padding-left: 1rem;
+  }
+  .div-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 600; color: white;
+  }
+  .div-amount.muted { color: var(--fire); opacity: 0.6; }
+  .div-arrow {
+    font-size: 0.75rem; color: var(--green); margin-left: 0.5rem; font-weight: 500;
+  }
+  .div-note {
+    margin-top: 1.5rem; font-size: 0.82rem; color: var(--brown);
+    font-style: italic; font-weight: 300; line-height: 1.6;
+    padding: 1rem 1.2rem; background: white; border-radius: 4px;
+    border-left: 3px solid var(--green);
+  }
+
+  /* EXTRAS STRATEGY */
+  .extras-section { margin-bottom: 4rem; }
+  .extras-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .extra-card {
+    background: var(--warm-white);
+    border: 1px solid rgba(42,33,24,0.1);
+    border-radius: 4px; padding: 2rem;
+  }
+  .extra-icon { font-size: 1.6rem; margin-bottom: 0.8rem; }
+  .extra-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400; color: var(--charcoal); margin-bottom: 0.6rem;
+  }
+  .extra-desc { font-size: 0.88rem; line-height: 1.7; color: var(--brown); font-weight: 300; }
+  .rule-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+  .rule-pill {
+    background: var(--mist); border-radius: 2px;
+    padding: 0.3rem 0.7rem; font-size: 0.72rem;
+    color: var(--brown); letter-spacing: 0.04em;
+  }
+
+  /* MANTRA */
+  .mantra-strip {
+    background: linear-gradient(135deg, var(--fire) 0%, var(--amber) 100%);
+    border-radius: 8px; padding: 2.5rem 3rem; margin-bottom: 4rem; text-align: center;
+  }
+  .mantra-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 300; font-style: italic;
+    color: white; line-height: 1.5;
+  }
+  .mantra-attr {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(255,255,255,0.6); margin-top: 0.8rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal); padding: 2.5rem 3rem; text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: var(--warm-white); margin-bottom: 0.3rem;
+  }
+  .footer-logo span { color: var(--amber); }
+  .footer-tagline { font-size: 0.75rem; color: rgba(255,255,255,0.3); font-style: italic; margin-bottom: 1.5rem; }
+  .footer-disc { font-size: 0.7rem; color: rgba(255,255,255,0.18); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .dashboard-hero { padding: 5rem 1.5rem 2.5rem; }
+    .summary-strip { padding: 1.5rem; }
+    .summary-inner { gap: 2rem; }
+    .dashboard-body { padding: 2rem 1.5rem; }
+    .machine-grid { grid-template-columns: 1fr; }
+    .extras-grid { grid-template-columns: 1fr; }
+    .stocks-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Fire<span>120</span> Investors</div>
+  <div class="nav-links">
+    <a href="fire120_new.html">← Home</a>
+    <a href="fire120_books.html">Books</a>
+    <div class="nav-badge">Members Dashboard</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="dashboard-hero">
+  <div class="hero-inner">
+    <div class="welcome-tag">🔥 Members Only · Real Portfolio · Real Numbers</div>
+    <h1>Julia Kai's<br><em>Live Portfolio Dashboard</em></h1>
+    <p>The 3-Bucket System for 120% growth in 3 years — plus the perpetual dividend engine running every week. Real account. Real Schwab. Real compounding.</p>
+  </div>
+</div>
+
+<!-- SUMMARY STRIP -->
+<div class="summary-strip">
+  <div class="summary-inner">
+    <div class="summary-item">
+      <span class="summary-num">$607K</span>
+      <span class="summary-label">Portfolio Value</span>
+    </div>
+    <div class="summary-item">
+      <span class="summary-num">$8,154</span>
+      <span class="summary-label">Feb Dividends</span>
+    </div>
+    <div class="summary-item">
+      <span class="summary-num">3</span>
+      <span class="summary-label">Buckets</span>
+    </div>
+    <div class="summary-item">
+      <span class="summary-num">120%</span>
+      <span class="summary-label">3-Year Target</span>
+    </div>
+    <div class="summary-item">
+      <span class="summary-num">$10K</span>
+      <span class="summary-label">Monthly Div Goal</span>
+    </div>
+    <div class="updated">Updated March 2026</div>
+  </div>
+</div>
+
+<div class="dashboard-body">
+
+  <!-- BUCKET 1 -->
+  <div class="dash-section">
+    <div class="dash-section-header">
+      <div class="bucket-num">01</div>
+      <div class="bucket-info">
+        <div class="bucket-name">Core Foundation — Mag 7 + Quality ETFs</div>
+        <div class="bucket-desc">The bedrock. Never sell. Hold through all conditions. These are the giants.</div>
+      </div>
+    </div>
+    <div class="stocks-grid">
+      <div class="stock-card core">
+        <div class="stock-ticker">NVDA</div>
+        <div class="stock-shares">1,100 shares</div>
+        <div class="stock-signal signal-hold">⏸ Hold — Wait</div>
+        <div class="stock-note">RSI 44 · Neutral zone. Entry $169–177 on pullback.</div>
+      </div>
+      <div class="stock-card core">
+        <div class="stock-ticker">AAPL</div>
+        <div class="stock-shares">150 shares</div>
+        <div class="stock-signal signal-core">🏛 Core</div>
+        <div class="stock-note">Mag 7 anchor. Hold forever. Add on dips below lower BB.</div>
+      </div>
+      <div class="stock-card core">
+        <div class="stock-ticker">GOOGL</div>
+        <div class="stock-shares">210 shares</div>
+        <div class="stock-signal signal-core">🏛 Core</div>
+        <div class="stock-note">AI + search dominance. Rule of 40 strong. Hold.</div>
+      </div>
+      <div class="stock-card core">
+        <div class="stock-ticker">AMZN</div>
+        <div class="stock-shares">106 shares</div>
+        <div class="stock-signal signal-core">🏛 Core</div>
+        <div class="stock-note">AWS + retail engine. Compounding machine. Never sell.</div>
+      </div>
+      <div class="stock-card core">
+        <div class="stock-ticker">HOOD</div>
+        <div class="stock-shares">2,300 shares</div>
+        <div class="stock-signal signal-hold">⏸ Hold</div>
+        <div class="stock-note">RSI 71 · High. No adds. Watch Mar 20 assignment.</div>
+      </div>
+      <div class="stock-card core">
+        <div class="stock-ticker">META</div>
+        <div class="stock-shares">Mag 7</div>
+        <div class="stock-signal signal-core">🏛 Core</div>
+        <div class="stock-note">AI + social dominance. Never sell. Add on BB lower band dips.</div>
+      </div>
+      <div class="stock-card core">
+        <div class="stock-ticker">MSFT</div>
+        <div class="stock-shares">Mag 7</div>
+        <div class="stock-signal signal-core">🏛 Core</div>
+        <div class="stock-note">Cloud + AI infrastructure. The most reliable compounder. Hold forever.</div>
+      </div>
+      <div class="stock-card core">
+        <div class="stock-ticker">TSLA</div>
+        <div class="stock-shares">Mag 7</div>
+        <div class="stock-signal signal-core">🏛 Core</div>
+        <div class="stock-note">Energy + autonomy + AI. Volatile but irreplaceable. Hold through all noise.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUCKET 2 -->
+  <div class="dash-section">
+    <div class="dash-section-header">
+      <div class="bucket-num">02</div>
+      <div class="bucket-info">
+        <div class="bucket-name">Hyper Growth — Fire 120% in 3 Years</div>
+        <div class="bucket-desc">High conviction. Long time horizon. RSI + BB entry discipline. No emotion.</div>
+      </div>
+    </div>
+    <div class="stocks-grid">
+      <div class="stock-card hyper">
+        <div class="stock-ticker">IONQ</div>
+        <div class="stock-shares">200 shares + LEAPS</div>
+        <div class="stock-signal signal-wait">👀 Wait for Dip</div>
+        <div class="stock-note">RSI 82 · Too high. Best long-term holding. Entry $28–32.</div>
+      </div>
+      <div class="stock-card hyper">
+        <div class="stock-ticker">HIMS</div>
+        <div class="stock-shares">300 shares</div>
+        <div class="stock-signal signal-buy">🟢 Buy Zone</div>
+        <div class="stock-note">RSI 28 · Down 78% from $70. 81% gross margins. Entry $14–16.</div>
+      </div>
+      <div class="stock-card hyper">
+        <div class="stock-ticker">PLTR</div>
+        <div class="stock-shares">21 shares</div>
+        <div class="stock-signal signal-wait">⏸ Wait</div>
+        <div class="stock-note">RSI 55 · Neutral. Wait for RSI &lt; 40. Entry $110–120.</div>
+      </div>
+      <div class="stock-card hyper">
+        <div class="stock-ticker">SOUN</div>
+        <div class="stock-shares">300 shares</div>
+        <div class="stock-signal signal-watch">👀 Watch</div>
+        <div class="stock-note">RSI 38 · Nearing oversold. Voice AI is real. Entry $7.50–8.50.</div>
+      </div>
+      <div class="stock-card hyper">
+        <div class="stock-ticker">TEM</div>
+        <div class="stock-shares">24 shares</div>
+        <div class="stock-signal signal-watch">👀 Watch</div>
+        <div class="stock-note">AI healthcare. Long-term conviction hold. Monitor RSI.</div>
+      </div>
+      <div class="stock-card hyper">
+        <div class="stock-ticker">NFLX</div>
+        <div class="stock-shares">700 shares</div>
+        <div class="stock-signal signal-hold">⏸ Hold</div>
+        <div class="stock-note">Rule of 40 ✅ Trim plan at $135. No CCs. Hold for full 120% upside.</div>
+      </div>
+      <div class="stock-card hyper">
+        <div class="stock-ticker">KVYO</div>
+        <div class="stock-shares">Hyper Growth · 120% Target</div>
+        <div class="stock-signal signal-watch">👀 Watch</div>
+        <div class="stock-note">Approaching upper BB. Hold. Wait for RSI pullback before adding.</div>
+      </div>
+      <div class="stock-card hyper">
+        <div class="stock-ticker">MNTN</div>
+        <div class="stock-shares">Hyper Growth · 120% Target</div>
+        <div class="stock-signal signal-hold">⏸ Hold</div>
+        <div class="stock-note">Long-term conviction. Monitor Rule of 40. Add on BB lower band + RSI &lt; 35.</div>
+      </div>
+      <div class="stock-card hyper">
+        <div class="stock-ticker">IREN</div>
+        <div class="stock-shares">Hyper Growth · 120% Target</div>
+        <div class="stock-signal signal-hold">⏸ Hold</div>
+        <div class="stock-note">Bitcoin cycle tailwind. Hold through volatility. Target 120% in 3 years.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUCKET 3 — DIVIDEND ENGINE -->
+  <div class="dash-section">
+    <div class="dash-section-header">
+      <div class="bucket-num">03</div>
+      <div class="bucket-info">
+        <div class="bucket-name">Dividend Engine — Living Expenses + Snowball</div>
+        <div class="bucket-desc">Pays living expenses every week. Surplus reinvested to grow the machine. The perpetual loop.</div>
+      </div>
+    </div>
+
+    <!-- CORE ENGINE -->
+    <div class="machine-section">
+      <div class="machine-inner">
+        <div class="machine-header">
+          <div>
+            <div class="machine-title">The <em>Perpetual Engine</em></div>
+            <div class="machine-sub">Weekly dividends reinvested on every dip → more shares → more dividends → forever</div>
+          </div>
+        </div>
+        <div class="machine-grid">
+          <div class="engine-card">
+            <div class="engine-ticker">MSTW</div>
+            <div class="engine-shares">6,031 shares · Target: 10,000</div>
+            <div class="engine-yield">~70%+</div>
+            <div class="engine-yield-label">Annual Dividend Yield · Weekly Pays</div>
+            <div class="engine-progress-wrap">
+              <div class="engine-progress" style="width:60%"></div>
+            </div>
+            <div class="engine-progress-label">
+              <span>6,031 shares</span>
+              <span>10,000 goal · 60%</span>
+            </div>
+          </div>
+          <div class="engine-card">
+            <div class="engine-ticker">YETH</div>
+            <div class="engine-shares">3,113 shares · Target: 10,000</div>
+            <div class="engine-yield">~70%+</div>
+            <div class="engine-yield-label">Annual Dividend Yield · Weekly Pays</div>
+            <div class="engine-progress-wrap">
+              <div class="engine-progress" style="width:31%"></div>
+            </div>
+            <div class="engine-progress-label">
+              <span>3,113 shares</span>
+              <span>10,000 goal · 31%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUPPORTING DIVIDEND ETFs -->
+    <div class="stocks-grid" style="margin-bottom:2rem;">
+      <div class="stock-card dividend">
+        <div class="stock-ticker">Supporting</div>
+        <div class="stock-shares">Dividend ETFs</div>
+        <div class="stock-signal signal-watch">🌊 Avg 30–45% Yield</div>
+        <div class="stock-note">Multiple dividend ETFs complement MSTW + YETH. All income reinvested on dips to grow the snowball.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIVIDEND INCOME TRACKER -->
+  <div class="dividend-section">
+    <div class="div-header">
+      <div class="div-title">Dividend Income —<br><em>Growing Every Month</em></div>
+      <div class="div-sub">Real income from a real account. Reinvested every week. Watch it compound.</div>
+    </div>
+    <div class="div-bars">
+      <div class="div-row">
+        <div class="div-month">Dec '25</div>
+        <div class="div-bar-wrap">
+          <div class="div-bar dec" style="width:100%">
+            <span class="div-amount">$13,000</span>
+          </div>
+        </div>
+      </div>
+      <div class="div-row">
+        <div class="div-month">Jan '26</div>
+        <div class="div-bar-wrap">
+          <div class="div-bar jan" style="width:58%">
+            <span class="div-amount">$7,600</span>
+          </div>
+        </div>
+      </div>
+      <div class="div-row">
+        <div class="div-month">Feb '26</div>
+        <div class="div-bar-wrap">
+          <div class="div-bar feb" style="width:63%">
+            <span class="div-amount">$8,154</span>
+            <span class="div-arrow">↑</span>
+          </div>
+        </div>
+      </div>
+      <div class="div-row">
+        <div class="div-month">Goal</div>
+        <div class="div-bar-wrap">
+          <div class="div-bar goal" style="width:77%">
+            <span class="div-amount muted">$10,000 / month</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="div-note">
+      Every dividend reinvested buys more shares. More shares pay more dividends. More dividends buy more shares. This is not a strategy — this is a machine. And it runs automatically, every single week. 🌊
+    </div>
+  </div>
+
+  <!-- EXTRAS — CSP + SWING -->
+  <div class="extras-section">
+    <div class="dash-section-header">
+      <div class="bucket-num" style="opacity:0.25">+</div>
+      <div class="bucket-info">
+        <div class="bucket-name">Extra Snowball Strategies</div>
+        <div class="bucket-desc">Two additional income engines. Pure discipline. Zero emotion.</div>
+      </div>
+    </div>
+    <div class="extras-grid">
+      <div class="extra-card">
+        <div class="extra-icon">🎯</div>
+        <div class="extra-title">CSP Income Strategy</div>
+        <div class="extra-desc">
+          Cash-Secured Puts on stocks we want to own anyway. Collect premium while waiting for the price we want. Worst case — we get assigned stock we love at a discount. Best case — free income added to the snowball.
+        </div>
+        <div class="rule-pills">
+          <div class="rule-pill">30–45 DTE</div>
+          <div class="rule-pill">No CCs on Winners</div>
+          <div class="rule-pill">Stocks We Love</div>
+          <div class="rule-pill">Premium → Reinvest</div>
+        </div>
+      </div>
+      <div class="extra-card">
+        <div class="extra-icon">⚡</div>
+        <div class="extra-title">BB + RSI Swing Trading</div>
+        <div class="extra-desc">
+          Bollinger Bands + RSI below 35 at the lower band = buy. RSI above 65 at the upper band = take profit on swing portion only. Core shares never sold. Only trade stocks already held for the long term.
+        </div>
+        <div class="rule-pills">
+          <div class="rule-pill">RSI &lt; 35 = Buy</div>
+          <div class="rule-pill">RSI &gt; 65 = Sell Swing</div>
+          <div class="rule-pill">Core Shares = Never Sell</div>
+          <div class="rule-pill">Rule of 40 First</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANTRA -->
+  <div class="mantra-strip">
+    <div class="mantra-text">
+      "Universe is my supply. I go free.<br>I am not the doer — the universe is."
+    </div>
+    <div class="mantra-attr">Julia Kai · Kona, Hawaii · Fire120 Investors</div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Fire<span>120</span> Investors</div>
+  <div class="footer-tagline">One Mind. Playing. · Kona, Hawaii</div>
+  <p class="footer-disc">Fire120 Investors is an educational platform and does not provide personalized financial advice. All content is for informational purposes only. Investing involves risk including possible loss of principal. Past performance does not guarantee future results. Always conduct your own research and consider consulting a licensed financial advisor before making investment decisions.</p>
+</footer>
+
+</body>
+</html>
