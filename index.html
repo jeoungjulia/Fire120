@@ -375,9 +375,25 @@
   .footer-disc { font-size: 0.72rem; color: rgba(255,255,255,0.2); max-width: 600px; margin: 0 auto; line-height: 1.6; }
 
   /* RESPONSIVE */
+  .mobile-books {
+    display: none;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--fire);
+    color: white !important;
+    padding: 0.8rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    z-index: 999;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
+    .mobile-books { display: block; }
     .hero { padding: 7rem 1.5rem 4rem; }
     .proof-strip { gap: 2rem; padding: 2rem 1.5rem; }
     .section { padding: 4rem 1.5rem; }
@@ -396,6 +412,7 @@
 <body>
 
 <!-- NAV -->
+<a href="https://jeoungjulia.github.io/Fire120/fire120_books.html" class="mobile-books">📖 Books</a>
 <nav>
   <div class="nav-logo">Fire<span>120</span> Investors</div>
   <div class="nav-links">
@@ -403,6 +420,7 @@
     <a href="#machine">The Machine</a>
     <a href="#strategy">Strategy</a>
     <a href="#benefits">Members Get</a>
+    <a href="fire120_books.html">📖 Books</a>
     <a href="#join" class="nav-cta">Join — $29/mo</a>
   </div>
 </nav>
