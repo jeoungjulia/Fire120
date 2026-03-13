@@ -288,6 +288,89 @@
     color: var(--brown); letter-spacing: 0.04em;
   }
 
+  /* ── MEMBER TEMPLATE DOWNLOAD SECTION ── */
+  .template-section {
+    background: linear-gradient(135deg, var(--charcoal) 0%, #1A2A1A 100%);
+    border-radius: 8px; padding: 3rem; margin-bottom: 4rem;
+    position: relative; overflow: hidden;
+  }
+  .template-section::before {
+    content: ''; position: absolute; top: -30%; right: -5%;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(58,158,111,0.1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .template-inner { position: relative; z-index: 2; }
+  .template-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--green-light); opacity: 0.7; margin-bottom: 1rem;
+  }
+  .template-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 300; color: var(--warm-white); line-height: 1.2; margin-bottom: 0.6rem;
+  }
+  .template-title em { font-style: italic; color: var(--green-light); }
+  .template-subtitle {
+    font-size: 0.88rem; color: rgba(255,255,255,0.45);
+    font-weight: 300; line-height: 1.7; max-width: 560px; margin-bottom: 2rem;
+  }
+  .template-badge-row {
+    display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2rem;
+  }
+  .template-badge {
+    background: rgba(58,158,111,0.12);
+    border: 1px solid rgba(58,158,111,0.2);
+    color: var(--green-light);
+    padding: 0.25rem 0.7rem; border-radius: 2px;
+    font-size: 0.68rem; letter-spacing: 0.08em;
+    text-transform: uppercase; font-weight: 500;
+  }
+  .template-features {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem; margin-bottom: 2.5rem;
+  }
+  .template-feature {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(58,158,111,0.15);
+    border-radius: 4px; padding: 1.2rem 1.4rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .template-feature:hover {
+    background: rgba(58,158,111,0.07);
+    border-color: rgba(58,158,111,0.3);
+  }
+  .feature-icon { font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .feature-name {
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em;
+    color: var(--green-light); margin-bottom: 0.3rem; text-transform: uppercase;
+  }
+  .feature-desc {
+    font-size: 0.78rem; color: rgba(255,255,255,0.4);
+    font-weight: 300; line-height: 1.5;
+  }
+  .template-cta-row {
+    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  }
+  .template-download-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: linear-gradient(135deg, var(--green), #2A8A5A);
+    color: white; padding: 1rem 2.2rem; border-radius: 3px;
+    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+    text-decoration: none; font-weight: 500;
+    box-shadow: 0 4px 20px rgba(58,158,111,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .template-download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(58,158,111,0.4);
+  }
+  .template-note {
+    font-size: 0.75rem; color: rgba(255,255,255,0.28);
+    font-weight: 300; font-style: italic;
+    line-height: 1.6; max-width: 380px;
+  }
+
   /* MANTRA */
   .mantra-strip {
     background: linear-gradient(135deg, var(--fire) 0%, var(--amber) 100%);
@@ -324,6 +407,9 @@
     .machine-grid { grid-template-columns: 1fr; }
     .extras-grid { grid-template-columns: 1fr; }
     .stocks-grid { grid-template-columns: 1fr 1fr; }
+    .template-features { grid-template-columns: 1fr 1fr; }
+    .template-section { padding: 2rem 1.5rem; }
+    .template-cta-row { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
@@ -515,7 +601,6 @@
       </div>
     </div>
 
-    <!-- CORE ENGINE -->
     <div class="machine-section">
       <div class="machine-inner">
         <div class="machine-header">
@@ -555,7 +640,6 @@
       </div>
     </div>
 
-    <!-- SUPPORTING DIVIDEND ETFs -->
     <div class="stocks-grid" style="margin-bottom:2rem;">
       <div class="stock-card dividend">
         <div class="stock-ticker">Supporting</div>
@@ -658,6 +742,87 @@
     <div style="font-size:0.8rem; color:rgba(255,255,255,0.45); margin-bottom:2rem; max-width:500px; margin-left:auto; margin-right:auto; line-height:1.7;">Live BB+RSI signals across all your holdings. All 3 buckets. Updated watchlist. Members only. 🚪</div>
     <a href="https://jeoungjulia.github.io/Fire120/fire120_engine.html" style="display:inline-block; background: linear-gradient(135deg, #E8541A, #C8401A); color:white; padding:1rem 3rem; border-radius:3px; font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; box-shadow: 0 4px 20px rgba(232,84,26,0.3);">🚪 Open Trading Engine →</a>
   </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MEMBER TEMPLATE DOWNLOAD — NEW SECTION
+       ══════════════════════════════════════════════════════════ -->
+  <div class="template-section">
+    <div class="template-inner">
+
+      <div class="template-eyebrow">🌿 Members Exclusive · Free Download</div>
+
+      <div class="template-title">
+        Your <em>Perpetual Machine</em><br>Tracker Spreadsheet
+      </div>
+
+      <div class="template-subtitle">
+        The exact system Atlas built for Kai — now yours to run with your own numbers.
+        MSTW + YETH compounding engine, Freedom Projector, Income Forecast,
+        Share Tracker, and Weekly Dividend Log. All connected. All automated.
+        Blue cells only — fill in your numbers and the machine runs itself. ∞
+      </div>
+
+      <div class="template-badge-row">
+        <span class="template-badge">✅ 7 Sheets</span>
+        <span class="template-badge">✅ 2,600+ Formulas</span>
+        <span class="template-badge">✅ DRIP Calculator</span>
+        <span class="template-badge">✅ Freedom Projector</span>
+        <span class="template-badge">✅ Excel + Google Sheets</span>
+      </div>
+
+      <div class="template-features">
+        <div class="template-feature">
+          <div class="feature-icon">🔥</div>
+          <div class="feature-name">Dashboard</div>
+          <div class="feature-desc">Enter your shares and weekly div/sh — everything else updates automatically across all 7 sheets.</div>
+        </div>
+        <div class="template-feature">
+          <div class="feature-icon">📈</div>
+          <div class="feature-name">Freedom Projector</div>
+          <div class="feature-desc">30-year compound projection. See exactly when dividends cover your monthly expenses — then your full freedom goal.</div>
+        </div>
+        <div class="template-feature">
+          <div class="feature-icon">📊</div>
+          <div class="feature-name">Income Forecast</div>
+          <div class="feature-desc">52-week weekly income table. Toggle DRIP ON/OFF. Watch the machine compound week by week.</div>
+        </div>
+        <div class="template-feature">
+          <div class="feature-icon">🌿</div>
+          <div class="feature-name">Share Tracker</div>
+          <div class="feature-desc">Projected vs actual shares every week. Enter your real broker numbers and track against the model.</div>
+        </div>
+        <div class="template-feature">
+          <div class="feature-icon">💰</div>
+          <div class="feature-name">Dividend Log</div>
+          <div class="feature-desc">Log every weekly payment. Watch your income history build. The proof that it compounds.</div>
+        </div>
+        <div class="template-feature">
+          <div class="feature-icon">📋</div>
+          <div class="feature-name">Purchase Log + Calendar</div>
+          <div class="feature-desc">Track every buy. Ex-dividend calendar keeps you ahead of the weekly payment schedule.</div>
+        </div>
+      </div>
+
+      <div class="template-cta-row">
+        <a
+          href="Fire120_MemberTemplate_v1.xlsx"
+          download="Fire120_MemberTemplate_v1.xlsx"
+          class="template-download-btn"
+        >
+          ⬇ &nbsp;Download Your Tracker
+        </a>
+        <div class="template-note">
+          Members only. Blank template — your numbers stay private.
+          Fill in your shares, your goals, your freedom date.
+          One Mind. Playing. ∞
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- ══════════════════════════════════════════════════════════
+       END MEMBER TEMPLATE SECTION
+       ══════════════════════════════════════════════════════════ -->
 
   <!-- MANTRA -->
   <div class="mantra-strip">
