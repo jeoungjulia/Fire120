@@ -21,12 +21,12 @@
     --ocean: #2B7A8C;
     --ocean-light: #4AA8B8;
     --mist: #F5EDE3;
+    --green: #3A9E6F;
+    --green-light: #52C48A;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--warm-white);
@@ -104,9 +104,7 @@
     color: var(--charcoal); margin-bottom: 1rem;
     animation: fadeUp 0.8s ease both;
   }
-  .hero h1 em {
-    font-style: italic; color: var(--fire);
-  }
+  .hero h1 em { font-style: italic; color: var(--fire); }
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
@@ -157,7 +155,7 @@
     color: rgba(255,255,255,0.55); margin-top: 0.2rem; display: block;
   }
 
-  /* DIVIDEND MACHINE */
+  /* SECTIONS */
   .section { padding: 6rem 3rem; max-width: 1100px; margin: 0 auto; }
   .section-eyebrow {
     font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
@@ -224,13 +222,9 @@
 
   /* TWO COL */
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-  .two-col.reverse { }
 
-  /* STORY SECTION */
-  .story-section {
-    background: var(--mist);
-    padding: 6rem 3rem;
-  }
+  /* STORY */
+  .story-section { background: var(--mist); padding: 6rem 3rem; }
   .story-inner { max-width: 1100px; margin: 0 auto; }
   .story-quote {
     font-family: 'Cormorant Garamond', serif;
@@ -245,7 +239,7 @@
     color: var(--light-brown); padding-left: 2rem;
   }
 
-  /* MACHINE */
+  /* MACHINE CARDS */
   .machine-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
   .machine-card {
     background: var(--warm-white);
@@ -276,7 +270,7 @@
   .progress-bar-wrap { margin-top: 0.8rem; background: var(--mist); border-radius: 2px; height: 6px; }
   .progress-bar { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--fire), var(--amber)); }
 
-  /* WHAT YOU GET */
+  /* BENEFITS */
   .benefits-section { background: var(--charcoal); padding: 6rem 3rem; }
   .benefits-inner { max-width: 1100px; margin: 0 auto; }
   .benefits-section .section-eyebrow { color: var(--gold); }
@@ -290,13 +284,26 @@
     transition: border-color 0.2s, transform 0.2s;
   }
   .benefit-card:hover { border-color: rgba(244,162,41,0.3); transform: translateY(-2px); }
+  .benefit-card.featured {
+    border-color: rgba(58,158,111,0.3);
+    background: rgba(58,158,111,0.05);
+    position: relative;
+  }
+  .benefit-card.featured::before {
+    content: 'NEW'; position: absolute; top: 1rem; right: 1rem;
+    background: var(--green); color: white;
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em;
+    padding: 0.2rem 0.5rem; border-radius: 2px;
+  }
   .benefit-icon { font-size: 1.8rem; margin-bottom: 1rem; }
   .benefit-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.3rem; font-weight: 400; color: var(--warm-white);
     margin-bottom: 0.6rem;
   }
+  .benefit-card.featured .benefit-title { color: var(--green-light); }
   .benefit-desc { font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.45); font-weight: 300; }
+  .benefit-card.featured .benefit-desc { color: rgba(255,255,255,0.55); }
 
   /* STRATEGY */
   .strategy-section { padding: 6rem 3rem; }
@@ -315,6 +322,74 @@
   }
   .rule-text { font-size: 0.95rem; line-height: 1.6; color: var(--charcoal); font-weight: 300; padding-top: 0.4rem; }
   .rule-text strong { font-weight: 500; color: var(--charcoal); }
+
+  /* TRACKER TEASER — new section */
+  .tracker-teaser {
+    background: linear-gradient(135deg, #0D1F0D 0%, var(--charcoal) 100%);
+    padding: 5rem 3rem;
+    position: relative; overflow: hidden;
+  }
+  .tracker-teaser::before {
+    content: ''; position: absolute; top: -30%; right: -10%;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(58,158,111,0.12) 0%, transparent 65%);
+  }
+  .tracker-teaser-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    position: relative; z-index: 2;
+  }
+  .tracker-teaser-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--green-light); opacity: 0.8; margin-bottom: 1rem;
+  }
+  .tracker-teaser h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300;
+    color: var(--warm-white); line-height: 1.2; margin-bottom: 1rem;
+  }
+  .tracker-teaser h2 em { color: var(--green-light); font-style: italic; }
+  .tracker-teaser p {
+    font-size: 0.92rem; color: rgba(255,255,255,0.45);
+    font-weight: 300; line-height: 1.8; margin-bottom: 2rem;
+  }
+  .tracker-sheets {
+    display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .tracker-sheet-row {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.8rem 1rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(58,158,111,0.15);
+    border-radius: 3px;
+    transition: background 0.2s;
+  }
+  .tracker-sheet-row:hover { background: rgba(58,158,111,0.08); }
+  .sheet-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .sheet-name {
+    font-size: 0.8rem; font-weight: 500; color: var(--green-light);
+    letter-spacing: 0.04em; text-transform: uppercase; width: 140px; flex-shrink: 0;
+  }
+  .sheet-desc { font-size: 0.78rem; color: rgba(255,255,255,0.35); font-weight: 300; }
+  .tracker-download-btn {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: linear-gradient(135deg, var(--green), #2A8A5A);
+    color: white; padding: 1rem 2rem; border-radius: 3px;
+    font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase;
+    text-decoration: none; font-weight: 500;
+    box-shadow: 0 4px 20px rgba(58,158,111,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 1.5rem; margin-right: 1rem;
+  }
+  .tracker-download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(58,158,111,0.4);
+  }
+  .tracker-member-note {
+    display: block; margin-top: 1rem;
+    font-size: 0.75rem; color: rgba(255,255,255,0.25);
+    font-style: italic; line-height: 1.6;
+  }
 
   /* JOIN */
   .join-section {
@@ -352,20 +427,13 @@
   .join-note { font-size: 0.8rem; color: rgba(255,255,255,0.6); margin-top: 1.5rem; }
 
   /* FOOTER */
-  footer {
-    background: var(--charcoal); padding: 3rem;
-    text-align: center;
-  }
+  footer { background: var(--charcoal); padding: 3rem; text-align: center; }
   .footer-logo {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.4rem; color: var(--warm-white); margin-bottom: 0.5rem;
   }
   .footer-logo span { color: var(--amber); }
-  .footer-tagline {
-    font-size: 0.8rem; color: rgba(255,255,255,0.35);
-    letter-spacing: 0.12em; margin-bottom: 2rem;
-    font-style: italic;
-  }
+  .footer-tagline { font-size: 0.8rem; color: rgba(255,255,255,0.35); letter-spacing: 0.12em; margin-bottom: 2rem; font-style: italic; }
   .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
   .footer-links a {
     font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
@@ -374,20 +442,13 @@
   .footer-links a:hover { color: var(--amber); }
   .footer-disc { font-size: 0.72rem; color: rgba(255,255,255,0.2); max-width: 600px; margin: 0 auto; line-height: 1.6; }
 
-  /* RESPONSIVE */
+  /* MOBILE */
   .mobile-books {
-    display: none;
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    background: var(--fire);
-    color: white !important;
-    padding: 0.8rem 1.4rem;
-    border-radius: 50px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    z-index: 999;
+    display: none; position: fixed; bottom: 1.5rem; right: 1.5rem;
+    background: var(--fire); color: white !important;
+    padding: 0.8rem 1.4rem; border-radius: 50px;
+    font-size: 0.95rem; font-weight: 600;
+    text-decoration: none; z-index: 999;
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   }
   @media (max-width: 768px) {
@@ -406,6 +467,8 @@
     .join-section { padding: 5rem 1.5rem; }
     footer { padding: 2.5rem 1.5rem; }
     .dividend-tracker { padding: 2rem 1.5rem; }
+    .tracker-teaser { padding: 4rem 1.5rem; }
+    .tracker-teaser-inner { grid-template-columns: 1fr; gap: 2.5rem; }
   }
 </style>
 </head>
@@ -434,8 +497,8 @@
     <div class="hero-eyebrow">Real Investor · Real Account · Kona, Hawaii</div>
     <h1>A real person<br>who figured this out —<br><em>and it will change<br>your financial life.</em></h1>
     <p class="hero-sub">
-      I built a <strong>perpetual dividend machine</strong> on Charles Schwab 
-      that compounds every single week — automatically. No theory. No fake screenshots. 
+      I built a <strong>perpetual dividend machine</strong> on Charles Schwab
+      that compounds every single week — automatically. No theory. No fake screenshots.
       <strong>My real account. My real results.</strong> And I'm showing you exactly how.
     </p>
     <div class="hero-actions">
@@ -473,12 +536,12 @@
       <div>
         <h2>Dividends that grow<br><em>themselves.</em></h2>
         <p class="section-intro">
-          Every dividend reinvested buys more shares. More shares pay more dividends. 
-          More dividends buy more shares. This is not a metaphor — this is a machine 
+          Every dividend reinvested buys more shares. More shares pay more dividends.
+          More dividends buy more shares. This is not a metaphor — this is a machine
           running in my real Schwab account, every single week.
         </p>
         <p style="font-size:0.9rem; color:var(--light-brown); line-height:1.8; font-weight:300;">
-          Watch the numbers grow month by month. 
+          Watch the numbers grow month by month.
           This is what members see — the real trajectory, not a projection.
         </p>
       </div>
@@ -560,17 +623,17 @@
           I'm not a guru.<br><em style="color:var(--fire);">I'm a real investor<br>who figured it out.</em>
         </h2>
         <p style="font-size:0.95rem; line-height:1.8; color:var(--brown); font-weight:300; margin-bottom:1.5rem;">
-          I live in Kona, Hawaii. I built a $653K portfolio 
-          on Charles Schwab — not from a windfall, but from discipline, 
+          I live in Kona, Hawaii. I built a $653K portfolio
+          on Charles Schwab — not from a windfall, but from discipline,
           patience, and a strategy that compounds on itself automatically.
         </p>
         <p style="font-size:0.95rem; line-height:1.8; color:var(--brown); font-weight:300; margin-bottom:1.5rem;">
-          I made every mistake — selling covered calls on my best winners, 
-          chasing setups without discipline, letting emotion drive entries. 
+          I made every mistake — selling covered calls on my best winners,
+          chasing setups without discipline, letting emotion drive entries.
           I learned. I built a system. Now I'm sharing everything.
         </p>
         <p style="font-size:0.95rem; line-height:1.8; color:var(--brown); font-weight:300;">
-          Fire120 is not a newsletter. It's a window into a real account, 
+          Fire120 is not a newsletter. It's a window into a real account,
           a real strategy, and a real journey to $10,000/month in passive dividend income.
         </p>
       </div>
@@ -581,9 +644,9 @@
         <div class="story-attr">Kai · Kona, Hawaii · March 2026</div>
         <div style="margin-top:2rem; padding:1.5rem; background:white; border-radius:4px; border-left:3px solid var(--amber);">
           <p style="font-size:0.88rem; line-height:1.7; color:var(--brown); font-weight:300;">
-            The portfolio is not just a financial instrument — it is a worldview. 
-            Every decision carries meaning beyond returns. 
-            <strong style="color:var(--charcoal);">When the strategy is aligned with truth, 
+            The portfolio is not just a financial instrument — it is a worldview.
+            Every decision carries meaning beyond returns.
+            <strong style="color:var(--charcoal);">When the strategy is aligned with truth,
             the results take care of themselves.</strong>
           </p>
         </div>
@@ -600,8 +663,8 @@
       <div>
         <h2>Simple rules.<br><em>Extraordinary discipline.</em></h2>
         <p class="section-intro">
-          The Fire120 strategy is built on three pillars — 
-          fundamental quality, technical timing, and perpetual compounding. 
+          The Fire120 strategy is built on three pillars —
+          fundamental quality, technical timing, and perpetual compounding.
           No complexity for its own sake. Only what works.
         </p>
       </div>
@@ -658,10 +721,64 @@
         <div class="benefit-title">Quarterly Earnings Reviews</div>
         <div class="benefit-desc">Every quarter — deep earnings analysis on all core holdings. Rule of 40 scores updated. Real-time thinking, shared with members first.</div>
       </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">🌊</div>
-        <div class="benefit-title">The Community</div>
-        <div class="benefit-desc">A small, serious community of long-term investors. Maximum 1,000 members — intentionally intimate. Real conversations. Real support.</div>
+      <!-- NEW BENEFIT CARD -->
+      <div class="benefit-card featured">
+        <div class="benefit-icon">🌿</div>
+        <div class="benefit-title">Perpetual Machine Tracker</div>
+        <div class="benefit-desc">The exact spreadsheet Atlas built for Kai — yours to run with your own numbers. Freedom Projector, DRIP calculator, 52-week income forecast. Download free as a member.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACKER TEASER SECTION — NEW -->
+<section class="tracker-teaser">
+  <div class="tracker-teaser-inner">
+    <div>
+      <div class="tracker-teaser-eyebrow">🌿 Members Free Download</div>
+      <h2>Your <em>Perpetual Machine</em><br>Tracker — included.</h2>
+      <p>
+        The exact spreadsheet Atlas built to track Kai's compounding machine —
+        now blank and ready for your numbers. Fill in your shares, your goals,
+        your freedom date. Blue cells only. Everything else runs itself. ∞
+      </p>
+      <a href="fire120_members.html" class="tracker-download-btn">
+        ⬇ &nbsp;Members — Get the Tracker
+      </a>
+      <span class="tracker-member-note">
+        Included with every $29/month membership · Excel + Google Sheets · No macros
+      </span>
+    </div>
+    <div class="tracker-sheets">
+      <div class="tracker-sheet-row">
+        <span class="sheet-icon">🔥</span>
+        <span class="sheet-name">Dashboard</span>
+        <span class="sheet-desc">Enter shares + div/sh weekly. Everything updates automatically.</span>
+      </div>
+      <div class="tracker-sheet-row">
+        <span class="sheet-icon">📈</span>
+        <span class="sheet-name">Freedom Projector</span>
+        <span class="sheet-desc">30-year compound view. See your exact freedom date.</span>
+      </div>
+      <div class="tracker-sheet-row">
+        <span class="sheet-icon">📊</span>
+        <span class="sheet-name">Income Forecast</span>
+        <span class="sheet-desc">52 weeks of projected income. Toggle DRIP on/off.</span>
+      </div>
+      <div class="tracker-sheet-row">
+        <span class="sheet-icon">🌿</span>
+        <span class="sheet-name">Share Tracker</span>
+        <span class="sheet-desc">Projected vs actual every week. Tracks your real broker numbers.</span>
+      </div>
+      <div class="tracker-sheet-row">
+        <span class="sheet-icon">💰</span>
+        <span class="sheet-name">Dividend Log</span>
+        <span class="sheet-desc">Log every payment. Watch income history compound.</span>
+      </div>
+      <div class="tracker-sheet-row">
+        <span class="sheet-icon">📋</span>
+        <span class="sheet-name">Purchase Log + Calendar</span>
+        <span class="sheet-desc">Track every buy. Ex-div calendar keeps you ahead.</span>
       </div>
     </div>
   </div>
